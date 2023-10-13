@@ -1,0 +1,178 @@
+﻿@model Ishu_Bowl.Models.BowlMaterialViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+
+<style>
+    /* Reset some default styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Set a background color and font */
+    body {
+        background-color: #1F4172; /* Use the specified background color */
+        font-family: 'Lilita One', cursive;
+        color: #333;
+    }
+
+    /* Header styles */
+    header {
+        background-color: #007ACC;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 5px solid #00579C;
+    }
+
+        header h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+        }
+
+    /* Content container styles */
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    /* Heading styles */
+    h2 {
+        font-size: 2rem;
+        color: #333;
+        margin-top: 20px;
+        border-bottom: 2px solid #007ACC;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        color: #555;
+    }
+
+    /* Paragraph styles */
+    p {
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    /* Image styles */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 20px 0;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Contact and address styles */
+    .address {
+        background-color: #007ACC;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Footer styles */
+    footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+</style>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Bowls" asp-action="Index">
+
+    <div class="form-group">
+        <label asp-for="SelectedBowlMaterial">Bowl Material:</label>
+        <select asp-for="SelectedBowlMaterial" asp-items="Model.BowlMaterials" class="form-control">
+            <option value="">All</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SearchString">Search:</label>
+        <input type="text" asp-for="SearchString" class="form-control" />
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bowls[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bowls[0].DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bowls[0].Material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bowls[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bowls[0].MicrowaveSafe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bowls[0].Depth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bowls[0].Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Bowls)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MicrowaveSafe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Depth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
